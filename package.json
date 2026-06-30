@@ -1,0 +1,24 @@
+{
+  "name": "chai-and-backend",
+  "version": "1.0.0",
+  "description": "a backend at chai aur backend",
+  "keywords": [
+    "javascript",
+    "backend"
+  ],
+  "homepage": "https://github.com/goel-nandini/chai-and-backend-#readme",
+  "bugs": {
+    "url": "https://github.com/goel-nandini/chai-and-backend-/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goel-nandini/chai-and-backend-.git"
+  },
+  "license": "ISC",
+  "author": "nandini",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
