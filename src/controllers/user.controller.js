@@ -1,8 +1,8 @@
 import { asyncHandler } from "../utils/asynchandler.js";
 import {ApiError} from "../utils/ApiError.js";
-import {User, user} from "../models/user.models.js";
+import {User} from "../models/user.models.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import {cloudinary} from 
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
 const registerUser = asyncHandler(async(req,res)=>{
     // get user details from frontned
     // validation
@@ -23,22 +23,25 @@ const registerUser = asyncHandler(async(req,res)=>{
     ){
         throw new ApiError(400, "all fields are required")
     }
-    const existeduser = User.findOne({
+    const existeduser =  await User.findOne({
         $or:[{username},{email}]
     })
     if(existeduser){
         throw new ApiError(409,"user with email or user name already exists")
     }
 
-    const avatarLocalPath = req.files?.avatar[0]?.path;
-    req.files?.coverImage[0]?.
-    path;
+    const avatarLocalPath = req.files?.avatar?.[0]?.path;
+    const coverImageLocalPath = req.files?.coverImage?.[0]?.path;
     if(!avatarLocalPath){
         throw new ApiError(400,"avatar is required")
     }
 
     const avatar = await uploadOnCloudinary(avatarLocalPath)
-    const coverImage= await uploadOnCloudinary(coverImage)
+    
+
+    
+    ? await uploadOnCloudinary(coverImageLocalPath)
+    : null;
 
     if(!avatar){
         throw new ApiError(400,"avatar is required")
@@ -50,7 +53,7 @@ const registerUser = asyncHandler(async(req,res)=>{
         coverImage: coverImage?.url || "",
         email,
         password,
-        username: username.toLowercase()
+        username: username.toLowerCase()
 
     })
 
