@@ -1,12 +1,9 @@
 import dotenv from "dotenv";
 dotenv.config();
-console.log("PORT:", process.env.PORT);
-console.log("MONGODB_URI:", process.env.MONGODB_URI);
-import express from "express";
+
+
 import connectDB from "./db/index.js";
-
-const app = express();
-
+import { app } from "./app.js";
 connectDB()
     .then(() => {
         app.on("error", (error) => {
